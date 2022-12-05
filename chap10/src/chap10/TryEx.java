@@ -6,7 +6,9 @@ public class TryEx {
 
   public static void main(String[] args) {
 
-    Connection conn;
+    private Connection conn;
+    private static final String USER_NAME = "java";
+
     try {
       conn = DriverManager.getConnection(
           "jdbc:mysql://localhost:3306/thisisjava?serverTimezone=UTC", "java", "mysql");
