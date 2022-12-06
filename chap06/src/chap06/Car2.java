@@ -1,7 +1,6 @@
 package chap06;
 
 public class Car2 {
-
   String company = "현대자동차";
   String model;
   String color;
@@ -24,6 +23,7 @@ public class Car2 {
     this.maxSpeed = maxSpeed;
 
   }
+
 
 
 }
