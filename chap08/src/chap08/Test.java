@@ -1,6 +1,5 @@
 package chap08;
 
-class Test2 extends Test implements RemoteControl{
   
   
 }
