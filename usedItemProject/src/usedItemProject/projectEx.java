@@ -8,7 +8,6 @@ public class projectEx {
 
 
   public static void main(String[] args) throws SQLException, ClassNotFoundException {
-    // TODO Auto-generated method stub
     Scanner sc = new Scanner(System.in);
     int selectNum = 0;
     boolean run = true;

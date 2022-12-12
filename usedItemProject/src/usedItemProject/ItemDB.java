@@ -9,6 +9,7 @@ public class ItemDB {
   Statement stmt;
   ResultSet rs;
   Scanner sc = new Scanner(System.in);
+  String sql;
 
 
   ItemDB() throws ClassNotFoundException, SQLException {
@@ -23,26 +24,80 @@ public class ItemDB {
   // select문에 order by 멘트를 추가하는 방식으로 구현
 
 
+//셀렉트데이터는 괄호 안에 있는 값을 쿼리 끝에 order by로 추가함. 최대 3개까지 적용 가능
 
-  String selectData() throws SQLException {
+  
+  //메소드 오버로딩
+ String selectData() throws SQLException {
     // executeQuery는 수행결과로 ResultSet 객체의 값을 반환한다.
     stmt = conn.createStatement();
-    rs = stmt.executeQuery("select * from itemDB");
+    sql = "select * from itemDB";
+    rs = stmt.executeQuery(sql);
     String str = null;
 
-    //
-
     while (rs.next()) {
-      String mb_id = rs.getString("id");
+      String id = rs.getString("id");
       String name = rs.getString("name");
       int price = rs.getInt("price");
       String address = rs.getString("address");
 
-      str += String.format("[%s] %s %d %s \n", mb_id, name, price, address);
+      str += String.format("[%s] %s %d %s \n", id, name, price, address);
     }
     return str;
-
+    
   }
+ 
+ String selectData(String column) throws SQLException {
+	 stmt = conn.createStatement();
+	 sql = "select * from itemDB order by"+column;
+	    rs = stmt.executeQuery(sql);
+	    String str = null;
+
+	    while (rs.next()) {
+	      String id = rs.getString("id");
+	      String name = rs.getString("name");
+	      int price = rs.getInt("price");
+	      String address = rs.getString("address");
+
+	      str += String.format("[%s] %s %d %s \n", id, name, price, address);
+	    }
+	    return str; 
+ }
+ 
+ String selectData(String column, String column2) throws SQLException {
+	 stmt = conn.createStatement();
+	 sql ="select * from itemDB order by "+column+","+column2;
+	    rs = stmt.executeQuery(sql);
+	    String str = null;
+
+	    while (rs.next()) {
+	      String id = rs.getString("id");
+	      String name = rs.getString("name");
+	      int price = rs.getInt("price");
+	      String address = rs.getString("address");
+
+	      str += String.format("[%s] %s %d %s \n", id, name, price, address);
+	    }
+	    return str; 
+ }
+ String selectData(String column, String column2,String column3) throws SQLException {
+	 stmt = conn.createStatement();
+	 sql="select * from itemDB order by "+column+","+column2+","+column3;
+	    rs = stmt.executeQuery(sql);
+	    String str = null;
+
+	    while (rs.next()) {
+	      String id = rs.getString("id");
+	      String name = rs.getString("name");
+	      int price = rs.getInt("price");
+	      String address = rs.getString("address");
+
+	      str += String.format("[%s] %s %d %s \n", id, name, price, address);
+	    }
+	    return str; 
+ }
+ 
+ 
 
   // insertData만 만들어둠
   void insertData() throws SQLException {
