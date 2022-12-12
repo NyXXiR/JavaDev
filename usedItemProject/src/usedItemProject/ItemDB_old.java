@@ -3,7 +3,7 @@ package usedItemProject;
 import java.sql.*;
 import java.util.Scanner;
 
-public class ItemDB {
+public class ItemDB_old {
   // columns: num, id, name, price, address, date
   Connection conn;
   Statement stmt;
@@ -11,29 +11,20 @@ public class ItemDB {
   Scanner sc = new Scanner(System.in);
 
 
-  ItemDB() throws ClassNotFoundException, SQLException {
+  ItemDB_old() throws ClassNotFoundException, SQLException {
     // connection part
     Class.forName("com.mysql.cj.jdbc.Driver");
-    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usedItemProject", "root2",
-        "mysql");
+    conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/thisisjava", "java", "mysql");
     System.out.println("연결 성공");
   }
 
-  // 전체 select, 찜갯수별, 등록시간순, 낮은시간순 정렬
-  // select문에 order by 멘트를 추가하는 방식으로 구현
-
-
-
-  String selectData() throws SQLException {
+  String selectAll() throws SQLException {
     // executeQuery는 수행결과로 ResultSet 객체의 값을 반환한다.
     stmt = conn.createStatement();
-    rs = stmt.executeQuery("select * from itemDB");
+    rs = stmt.executeQuery("select * from item");
     String str = null;
-
-    //
-
     while (rs.next()) {
-      String mb_id = rs.getString("id");
+      String mb_id = rs.getString("mb_id");
       String name = rs.getString("name");
       int price = rs.getInt("price");
       String address = rs.getString("address");
@@ -75,20 +66,19 @@ public class ItemDB {
     System.out.println(result + " 건의 데이터가 삭제되었습니다.");
   }
 
-
-
-  // update 필요하면 구현
-
-
-  void updateData() {}
-
-
   // 판매된 itemDB의 행 soldItemDB에 추가 > itemDB 행 삭제
   void moveData() {
     // addActionListener로 클릭 인식. this
 
 
   }
+
+
+
+  // update 필요하면 구현
+  // void updateData() {}
+
+
 
 }
 
