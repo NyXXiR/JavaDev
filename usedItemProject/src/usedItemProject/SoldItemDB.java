@@ -1,25 +1,23 @@
 package usedItemProject;
 
 import java.sql.*;
-import java.util.*;
+import java.util.Scanner;
 
-public class ItemDB {
+public class SoldItemDB {
   // columns: num, id, name, price, address, date
   Connection conn;
   Statement stmt;
-  PreparedStatement pstm;
   ResultSet rs;
   Scanner sc = new Scanner(System.in);
   String sql;
-  SoldItemDB soldItemDB = new SoldItemDB();
-  public ArrayList<ItemList> itemList = new ArrayList<ItemList>();
 
-  ItemDB() throws ClassNotFoundException, SQLException {
+
+  SoldItemDB() throws ClassNotFoundException, SQLException {
     // connection part
     Class.forName("com.mysql.cj.jdbc.Driver");
     conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usedItemProject", "root2",
         "mysql");
-    System.out.println("itemDB 연결 성공");
+    System.out.println("soldItemDB 연결 성공");
   }
 
   // 전체 select, 찜갯수별, 등록시간순, 낮은시간순 정렬
@@ -31,107 +29,115 @@ public class ItemDB {
 
 
   // 메소드 오버로딩
-  ArrayList<ItemList> searchData(String column) throws SQLException {
+  String searchData(String column) throws SQLException {
     stmt = conn.createStatement();
-    String sql = "select * from itemDB where name like '%" + column + "%'";
+    String sql = "select * from soldItemDB where name like '%" + column + "%'";
     rs = stmt.executeQuery(sql);
+    String str = null;
 
     while (rs.next()) {
       String id = rs.getString("id");
       String name = rs.getString("name");
-      String price = rs.getString("price");
+      int price = rs.getInt("price");
       String address = rs.getString("address");
       String content = rs.getString("content");
       String transaction = rs.getString("transaction");
-      String like = rs.getString("like");
-      String date = rs.getString("date");
+      int like = rs.getInt("like");
 
-      itemList.add(new ItemList(id, name, price, address, content, transaction, like, date));
+
+      str += String.format("[%s] %s %d %s %s %s %d \n", id, name, price, address, content,
+          transaction, like);
     }
-    return itemList;
+    return str;
   }
 
-  ArrayList<ItemList> selectData() throws SQLException {
+  String selectData() throws SQLException {
     // executeQuery는 수행결과로 ResultSet 객체의 값을 반환한다.
     stmt = conn.createStatement();
-    sql = "select * from itemDB";
+    sql = "select * from soldItemDB";
     rs = stmt.executeQuery(sql);
+    String str = null;
 
-    // for문으로 바꿔서 한 줄씩 출력되게 만들어야
     while (rs.next()) {
       String id = rs.getString("id");
       String name = rs.getString("name");
-      String price = rs.getString("price");
+      int price = rs.getInt("price");
       String address = rs.getString("address");
       String content = rs.getString("content");
       String transaction = rs.getString("transaction");
-      String like = rs.getString("like");
-      String date = rs.getString("date");
+      int like = rs.getInt("like");
 
-      itemList.add(new ItemList(id, name, price, address, content, transaction, like, date));
+
+      str += String.format("[%s] %s %d %s %s %s %d \n", id, name, price, address, content,
+          transaction, like);
     }
-    return itemList;
+    return str;
   }
 
-  ArrayList<ItemList> selectData(String column) throws SQLException {
+  String selectData(String column) throws SQLException {
     stmt = conn.createStatement();
-    sql = String.format("select * from itemDB order by %s;", column);
+    sql = String.format("select * from soldItemDB order by %s;", column);
     rs = stmt.executeQuery(sql);
+    String str = null;
 
     while (rs.next()) {
       String id = rs.getString("id");
       String name = rs.getString("name");
-      String price = rs.getString("price");
+      int price = rs.getInt("price");
       String address = rs.getString("address");
       String content = rs.getString("content");
       String transaction = rs.getString("transaction");
-      String like = rs.getString("like");
-      String date = rs.getString("date");
+      int like = rs.getInt("like");
 
-      itemList.add(new ItemList(id, name, price, address, content, transaction, like, date));
+
+      str += String.format("[%s] %s %d %s %s %s %d \n", id, name, price, address, content,
+          transaction, like);
     }
-    return itemList;
+    return str;
   }
 
-  ArrayList<ItemList> selectData(String column, String column2) throws SQLException {
+  String selectData(String column, String column2) throws SQLException {
     stmt = conn.createStatement();
-    sql = String.format("select * from itemDB order by %s, %s;", column, column2);
+    sql = String.format("select * from soldItemDB order by %s, %s;", column, column2);
     rs = stmt.executeQuery(sql);
+    String str = null;
 
     while (rs.next()) {
       String id = rs.getString("id");
       String name = rs.getString("name");
-      String price = rs.getString("price");
+      int price = rs.getInt("price");
       String address = rs.getString("address");
       String content = rs.getString("content");
       String transaction = rs.getString("transaction");
-      String like = rs.getString("like");
-      String date = rs.getString("date");
+      int like = rs.getInt("like");
 
-      itemList.add(new ItemList(id, name, price, address, content, transaction, like, date));
+
+      str += String.format("[%s] %s %d %s %s %s %d \n", id, name, price, address, content,
+          transaction, like);
     }
-    return itemList;
+    return str;
   }
 
-  ArrayList<ItemList> selectData(String column, String column2, String column3)
-      throws SQLException {
+  String selectData(String column, String column2, String column3) throws SQLException {
     stmt = conn.createStatement();
-    sql = String.format("select * from itemDB order by %s, %s, %s;", column, column2, column3);
+    sql = String.format("select * from soldItemDB order by %s, %s, %s;", column, column2, column3);
     rs = stmt.executeQuery(sql);
+    String str = null;
 
     while (rs.next()) {
       String id = rs.getString("id");
       String name = rs.getString("name");
-      String price = rs.getString("price");
+      int price = rs.getInt("price");
       String address = rs.getString("address");
       String content = rs.getString("content");
       String transaction = rs.getString("transaction");
-      String like = rs.getString("like");
-      String date = rs.getString("date");
+      int like = rs.getInt("like");
 
-      itemList.add(new ItemList(id, name, price, address, content, transaction, like, date));
+
+      str += String.format("[%s] %s %d %s %s %s %d \n", id, name, price, address, content,
+          transaction, like);
     }
-    return itemList;
+    return str;
   }
 
 
@@ -158,43 +164,19 @@ public class ItemDB {
     stmt = conn.createStatement();
 
     String sql =
-        String.format("insert into itemDB values(0,'%s','%s', %d,'%s', '%s', '%s',0,now())",
+        String.format("insert into soldItemDB values(0,'%s','%s', %d,'%s', '%s', '%s',0,now())",
             inputId, inputName, intPrice, inputAddress, inputContent, inputTransaction);
     int result = stmt.executeUpdate(sql);
 
     System.out.println(result + " 건의 데이터를 처리했습니다.");
   }
 
-  int insertData2(ItemList itemDB) throws SQLException {
-    String sql =
-        "insert into ItemDB(name, price, address, content, transaction) values (?,?,?,?,?)";
-    pstm = conn.prepareStatement(sql);
-    pstm.setString(1, itemDB.name);
-    pstm.setString(2, itemDB.price);
-    pstm.setString(3, itemDB.address);
-    pstm.setString(4, itemDB.content);
-    pstm.setString(5, itemDB.transaction);
-
-    return 0;
-  }
-
-
-
-  // 뭘 매개변수로 넣어서 delete를 실행하는 게 좋을까? 클릭된 this를 지우면 된다.
-  // 옮기면서 buyerID를 추가함. 구매 date는 알아서 입력됨.
-
-  // 클릭하면
-
-  // 몇 가지 변수는 마우스로 입력할 수 있으면 편할 듯. address랑 transaction
-
+  // 뭘 매개변수로 넣어서 delete를 실행하는 게 좋을까?
   void deleteData(String name) throws SQLException {
     stmt = conn.createStatement();
     String sql = String.format("delete from student where name=%s", name);
     int result = stmt.executeUpdate(sql);
     System.out.println(result + " 건의 데이터가 삭제되었습니다.");
-
-
-
   }
 
 
@@ -205,12 +187,10 @@ public class ItemDB {
   void updateData() {}
 
 
-  // 판매된 itemDB의 행 soldItemDB에 추가 > itemDB 행 삭제
+  // 판매된 soldItemDB의 행 soldsoldItemDB에 추가 > soldItemDB 행 삭제
   void moveData() {
-    // String column = null;
-    // soldItemDB.insertData(column);
 
-    // 특정한 행의 데이터를 가져와서 복제하고 기존 행을 삭제.
+    // addActionListener로 클릭 인식. this
 
 
 

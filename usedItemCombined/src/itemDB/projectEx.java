@@ -1,4 +1,4 @@
-package usedItemProject;
+package itemDB;
 
 import java.sql.SQLException;
 import java.util.*;

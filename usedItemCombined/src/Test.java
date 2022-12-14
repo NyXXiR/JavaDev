@@ -1,9 +1,8 @@
-package usedItemProject;
-
 import java.sql.SQLException;
 import java.util.*;
+import itemDB.*;
 
-public class projectEx {
+public class Test {
 
 
 
@@ -96,4 +95,3 @@ public class projectEx {
 
 
 }
-

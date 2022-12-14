@@ -1,4 +1,4 @@
-package usedItemProject;
+package itemDB;
 
 import java.sql.*;
 import java.util.*;
@@ -14,7 +14,7 @@ public class ItemDB {
   SoldItemDB soldItemDB = new SoldItemDB();
   public ArrayList<ItemList> itemList = new ArrayList<ItemList>();
 
-  ItemDB() throws ClassNotFoundException, SQLException {
+  public ItemDB() throws ClassNotFoundException, SQLException {
     // connection part
     Class.forName("com.mysql.cj.jdbc.Driver");
     conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/usedItemProject", "root2",
@@ -31,7 +31,7 @@ public class ItemDB {
 
 
   // 메소드 오버로딩
-  ArrayList<ItemList> searchData(String column) throws SQLException {
+  public ArrayList<ItemList> searchData(String column) throws SQLException {
     stmt = conn.createStatement();
     String sql = "select * from itemDB where name like '%" + column + "%'";
     rs = stmt.executeQuery(sql);
@@ -51,7 +51,7 @@ public class ItemDB {
     return itemList;
   }
 
-  ArrayList<ItemList> selectData() throws SQLException {
+  public ArrayList<ItemList> selectData() throws SQLException {
     // executeQuery는 수행결과로 ResultSet 객체의 값을 반환한다.
     stmt = conn.createStatement();
     sql = "select * from itemDB";
@@ -73,7 +73,7 @@ public class ItemDB {
     return itemList;
   }
 
-  ArrayList<ItemList> selectData(String column) throws SQLException {
+  public ArrayList<ItemList> selectData(String column) throws SQLException {
     stmt = conn.createStatement();
     sql = String.format("select * from itemDB order by %s;", column);
     rs = stmt.executeQuery(sql);
@@ -93,7 +93,7 @@ public class ItemDB {
     return itemList;
   }
 
-  ArrayList<ItemList> selectData(String column, String column2) throws SQLException {
+  public ArrayList<ItemList> selectData(String column, String column2) throws SQLException {
     stmt = conn.createStatement();
     sql = String.format("select * from itemDB order by %s, %s;", column, column2);
     rs = stmt.executeQuery(sql);
@@ -113,7 +113,7 @@ public class ItemDB {
     return itemList;
   }
 
-  ArrayList<ItemList> selectData(String column, String column2, String column3)
+  public ArrayList<ItemList> selectData(String column, String column2, String column3)
       throws SQLException {
     stmt = conn.createStatement();
     sql = String.format("select * from itemDB order by %s, %s, %s;", column, column2, column3);
@@ -136,7 +136,7 @@ public class ItemDB {
 
 
   // insertData만 만들어둠
-  void insertData() throws SQLException {
+  public void insertData() throws SQLException {
     // executeUpdate는 반영된 레코드의 건수를 반환한다.(바로 insert, update, delete하면 되니까 rs를 리턴받을 필요가 없다)
     // 날짜 칸은 입력 안하면 오늘자가 자동으로 입력된다는데 확인해보자.
 
@@ -187,7 +187,7 @@ public class ItemDB {
 
   // 몇 가지 변수는 마우스로 입력할 수 있으면 편할 듯. address랑 transaction
 
-  void deleteData(String name) throws SQLException {
+  public void deleteData(String name) throws SQLException {
     stmt = conn.createStatement();
     String sql = String.format("delete from student where name=%s", name);
     int result = stmt.executeUpdate(sql);
